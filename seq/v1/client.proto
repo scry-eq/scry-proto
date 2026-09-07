@@ -38,14 +38,14 @@ message Subscribe {
 // connected clients on the resulting filtersChanged signal.
 message AddFilterRule {
   uint32 filter_type = 1;
-  string pattern     = 2;
-  bool   per_zone    = 3;
+  string pattern = 2;
+  bool per_zone = 3;
 }
 
 message RemoveFilterRule {
   uint32 filter_type = 1;
-  string pattern     = 2;
-  bool   per_zone    = 3;
+  string pattern = 2;
+  bool per_zone = 3;
 }
 
 // Client -> server filter-rule edit. Daemon applies via FilterMgr's
@@ -56,10 +56,10 @@ message RemoveFilterRule {
 // replaces old_pattern. Changing filter_type or per_zone is not
 // supported via this message — use Remove + Add instead.
 message EditFilterRule {
-  uint32 filter_type  = 1;
-  string old_pattern  = 2;
-  string new_pattern  = 3;
-  bool   per_zone     = 4;
+  uint32 filter_type = 1;
+  string old_pattern = 2;
+  string new_pattern = 3;
+  bool per_zone = 4;
 }
 
 // Client -> server trigger to persist the in-memory filter rules to
@@ -109,7 +109,7 @@ message ListDevices {}
 // SpawnPointUpdated envelope to every connected client. Unknown keys
 // are silently dropped — no error envelope yet.
 message RenameSpawnPoint {
-  string key  = 1;
+  string key = 1;
   string name = 2;
 }
 
@@ -142,18 +142,18 @@ message SetMapPackage {
 
 message ClientEnvelope {
   oneof payload {
-    Subscribe        subscribe           = 1;
-    AddFilterRule    add_filter_rule     = 2;
-    RemoveFilterRule remove_filter_rule  = 3;
-    SetPref          set_pref            = 4;
-    ReloadFilters    reload_filters      = 5;
-    EditFilterRule   edit_filter_rule    = 6;
-    SaveFilters      save_filters        = 7;
-    ListDevices      list_devices        = 8;
-    RenameSpawnPoint rename_spawn_point  = 9;
-    SetActiveBox     set_active_box      = 10;
-    ListMapPackages  list_map_packages   = 11;
-    SetMapPackage    set_map_package     = 12;
+    Subscribe subscribe = 1;
+    AddFilterRule add_filter_rule = 2;
+    RemoveFilterRule remove_filter_rule = 3;
+    SetPref set_pref = 4;
+    ReloadFilters reload_filters = 5;
+    EditFilterRule edit_filter_rule = 6;
+    SaveFilters save_filters = 7;
+    ListDevices list_devices = 8;
+    RenameSpawnPoint rename_spawn_point = 9;
+    SetActiveBox set_active_box = 10;
+    ListMapPackages list_map_packages = 11;
+    SetMapPackage set_map_package = 12;
   }
   reserved 13;
   reserved "loot_query";
