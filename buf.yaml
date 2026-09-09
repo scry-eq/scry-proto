@@ -14,4 +14,6 @@ lint:
     - FIELD_LOWER_SNAKE_CASE
 breaking:
   use:
-    - FILE
+    # Consumers pin a SHA and regenerate, so source-level deletion is safe;
+    # reserved numbers + names keep it wire-safe. WIRE_JSON enforces that.
+    - WIRE_JSON

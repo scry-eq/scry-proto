@@ -9,46 +9,47 @@ message Envelope {
   uint64 server_ts_ms = 2;
 
   oneof payload {
-    Snapshot          snapshot      = 10;
-    ZoneChanged       zone_changed  = 11;
-    SpawnAdded        spawn_added   = 12;
-    SpawnUpdated      spawn_updated = 13;
-    SpawnRemoved      spawn_removed = 14;
-    SpawnKilled       spawn_killed  = 15;
-    PlayerStats       player_stats  = 16;
-    ChatMessage       chat          = 17;
-    ExperienceTick    exp           = 18;
-    GroupUpdate       group         = 19;
-    BuffsUpdate       buffs         = 20;
-    CombatEvent       combat        = 21;
-    CategoriesUpdate  categories    = 22;
-    FilterRulesUpdate filter_rules  = 23;
-    PrefsSnapshot     prefs         = 24;
-    PrefChanged       pref_changed  = 25;
-    Considered        considered    = 26;
-    Targeted          targeted      = 27;
-    SpawnPointAdded   spawn_point_added    = 28;
-    SpawnPointUpdated spawn_point_updated  = 29;
-    SpawnPointRemoved spawn_point_removed  = 30;
+    Snapshot snapshot = 10;
+    ZoneChanged zone_changed = 11;
+    SpawnAdded spawn_added = 12;
+    SpawnUpdated spawn_updated = 13;
+    SpawnRemoved spawn_removed = 14;
+    SpawnKilled spawn_killed = 15;
+    PlayerStats player_stats = 16;
+    ChatMessage chat = 17;
+    ExperienceTick exp = 18;
+    GroupUpdate group = 19;
+    BuffsUpdate buffs = 20;
+    CombatEvent combat = 21;
+    CategoriesUpdate categories = 22;
+    FilterRulesUpdate filter_rules = 23;
+    PrefsSnapshot prefs = 24;
+    PrefChanged pref_changed = 25;
+    Considered considered = 26;
+    Targeted targeted = 27;
+    SpawnPointAdded spawn_point_added = 28;
+    SpawnPointUpdated spawn_point_updated = 29;
+    SpawnPointRemoved spawn_point_removed = 30;
     SpawnPointsCleared spawn_points_cleared = 31;
-    DevicesList       devices_list         = 32;
-    ItemLearned       item_learned         = 33;
-    ItemCacheTotals   item_totals          = 34;
-    WornSet           worn_set             = 35;
-    EqTimeSync        eq_time_sync         = 36;
-    ZoneServer        zone_server          = 37;
-    BoxListUpdated    box_list_updated     = 38;
-    MapPackagesUpdate map_packages         = 39;
-    InspectAnswer     inspect_answer       = 40;
-    SpawnEffectsUpdate spawn_effects       = 41;
-    LootDrops         loot_drops           = 42;
-    SpawnCast         spawn_cast           = 43;
-    LootTransaction   loot_transaction     = 44;
-    GuildRoster       guild_roster         = 45;
-    GuildMotd         guild_motd           = 46;
-    GuildRankNames    guild_rank_names     = 47;
-    LootPage          loot_page            = 48;
+    DevicesList devices_list = 32;
+    ItemLearned item_learned = 33;
+    ItemCacheTotals item_totals = 34;
+    WornSet worn_set = 35;
+    EqTimeSync eq_time_sync = 36;
+    ZoneServer zone_server = 37;
+    BoxListUpdated box_list_updated = 38;
+    MapPackagesUpdate map_packages = 39;
+    InspectAnswer inspect_answer = 40;
+    SpawnEffectsUpdate spawn_effects = 41;
+    LootDrops loot_drops = 42;
+    SpawnCast spawn_cast = 43;
+    LootTransaction loot_transaction = 44;
+    GuildRoster guild_roster = 45;
+    GuildMotd guild_motd = 46;
+    GuildRankNames guild_rank_names = 47;
   }
+  reserved 48;
+  reserved "loot_page";
 }
 
 // The player's guild message of the day. Sent once per zone-in; message and
@@ -132,8 +133,8 @@ message Pos {
   // 270=W). Daemon converts from EQ's raw representation (12-bit for the
   // player, 8-bit for other spawns, both stored truncated to int8_t in
   // the legacy classes) so clients don't have to special-case formats.
-  int32  heading = 7;
-  int32  delta_heading = 8;
+  int32 heading = 7;
+  int32 delta_heading = 8;
   uint32 animation = 9;
 }
 
@@ -148,27 +149,27 @@ enum SpawnType {
 }
 
 message Spawn {
-  uint32     id = 1;
-  string     name = 2;
-  string     last_name = 3;
-  uint32     level = 4;
-  uint32     race = 5;
-  uint32     class_ = 6;
-  uint32     deity = 7;
-  uint32     hp_cur = 8;
-  uint32     hp_max = 9;
-  SpawnType  type = 10;
-  Pos        pos = 11;
-  uint32     guild_id = 12;
-  uint32     guild_server_id = 13;
-  bool       is_gm = 14;
-  bool       is_linkdead = 15;
-  bool       is_invis = 16;
+  uint32 id = 1;
+  string name = 2;
+  string last_name = 3;
+  uint32 level = 4;
+  uint32 race = 5;
+  uint32 class_ = 6;
+  uint32 deity = 7;
+  uint32 hp_cur = 8;
+  uint32 hp_max = 9;
+  SpawnType type = 10;
+  Pos pos = 11;
+  uint32 guild_id = 12;
+  uint32 guild_server_id = 13;
+  bool is_gm = 14;
+  bool is_linkdead = 15;
+  bool is_invis = 16;
   // Bitmask of FilterMgr categories this spawn matched (Hunt=1, Caution=2,
   // Danger=4, Locate=8, Alert=16, Filtered=32, Tracer=64, ...). Mirrors
   // showeq-c/src/spawn.h:147 — FilterMgr recomputes on add and on each
   // spawn update.
-  uint32     filter_flags = 17;
+  uint32 filter_flags = 17;
   // Indices (into the latest CategoriesUpdate.categories) of the
   // user-defined Category groupings that this spawn matches. Computed
   // by the daemon on SpawnAdded only — incremental SpawnUpdated events
@@ -200,9 +201,9 @@ message Spawn {
 }
 
 message Snapshot {
-  string         zone_short = 1;
-  string         zone_long = 2;
-  uint32         player_id = 3;
+  string zone_short = 1;
+  string zone_long = 2;
+  uint32 player_id = 3;
   repeated Spawn spawns = 4;
   // Geometry of the current zone's .map file. Omitted if the daemon has not
   // resolved a map for the zone (e.g. before the first zone packet, or when
@@ -210,13 +211,13 @@ message Snapshot {
   // TODO(phase-future): revisit serving maps over a static HTTP endpoint so
   // the browser can cache them across sessions. Inline for v1 keeps one
   // transport.
-  MapGeometry    geometry = 5;
+  MapGeometry geometry = 5;
   // Session id assigned (or echoed back) by the daemon. Clients persist
   // it and pass it via Subscribe.session_id on reconnect to ask for a
   // resume from Subscribe.last_seq instead of a fresh Snapshot. Empty
   // for the daemon-internal --record-golden adapter (no client to
   // resume).
-  string         session_id = 6;
+  string session_id = 6;
   // SpawnMonitor's currently-promoted spawn points for this zone. Empty
   // before the first NPC pop after entering the zone — points only get
   // promoted from the candidate pool once a second spawn arrives at the
@@ -224,36 +225,36 @@ message Snapshot {
   repeated SpawnPoint spawn_points = 7;
   // Daemon's persistent ItemCache contents — every item ever observed
   // via OP_ItemPacket. Subsequent inserts arrive as ItemLearned events.
-  repeated Item       items        = 8;
+  repeated Item items = 8;
   // Sum of HP/mana/AC/stats over the items currently equipped (player's
   // worn slots, populated from the OP_ItemPacket wrapper's main_slot/
   // sub_slot fields). Re-sent as ItemCacheTotals events on each worn
   // change. Empty until the first equip/un-equip event after subscribe.
-  ItemCacheTotals     item_totals  = 9;
+  ItemCacheTotals item_totals = 9;
   // Slot → itemId map of the player's currently equipped gear, with the
   // same per-slot semantics as ItemCacheTotals. Re-sent as WornSet
   // events on each change.
-  WornSet             worn_set     = 10;
+  WornSet worn_set = 10;
   // Most recent Norrath-time sync from OP_TimeOfDay. Empty until the
   // daemon has observed at least one OP_TimeOfDay packet (typically
   // arrives on zone-in). Clients extrapolate forward locally — see
   // EqTimeSync for the cadence/scaling note.
-  EqTimeSync          eq_time_sync = 11;
+  EqTimeSync eq_time_sync = 11;
   // Last OP_ZoneServerInfo seen — host + port of the EQ zone server the
   // sniffed client is currently connected to. Empty before the first
   // world->zone handoff observed since daemon start.
-  ZoneServer          zone_server  = 12;
+  ZoneServer zone_server = 12;
   // The daemon's data namespace (SEQ_DATA_NAMESPACE): ".scry" for Live,
-  // ".scry/eql" for EQL. Clients write per-backend data (e.g. the loot DB)
-  // under ~/<data_namespace>/ so EQL and Live don't share files.
+  // ".scry/eql" for EQL. Clients write per-backend data under
+  // ~/<data_namespace>/ so EQL and Live don't share files.
   // Was ".showeq" before the Scry rename; the daemon still READS the old
   // root as a fallback, but always reports the new one here.
-  string              data_namespace = 13;
+  string data_namespace = 13;
 }
 
 message ZoneChanged {
-  string      zone_short = 1;
-  string      zone_long = 2;
+  string zone_short = 1;
+  string zone_long = 2;
   // See Snapshot.geometry TODO.
   MapGeometry geometry = 3;
 }
@@ -266,7 +267,7 @@ message ZoneChanged {
 message MapLine {
   // Hex color string as stored in the .map file (e.g. "#ff8040"). The
   // client maps these to its palette; daemon does not normalize.
-  string         color = 1;
+  string color = 1;
   // Packed coordinate arrays. x.size() == y.size(). z is either empty
   // (line has no height information), length 1 (single shared z for the
   // whole line), or equal to x.size() (per-point z).
@@ -276,17 +277,17 @@ message MapLine {
   // 0-based layer index this line came from (mirrors MapData::mapLayer
   // ordering — base = 0, _1 = 1, _2 = 2, ...). Lets the client toggle
   // individual layer visibility without re-streaming.
-  uint32         layer = 5;
+  uint32 layer = 5;
 }
 
 message MapLocation {
-  string name    = 1;
-  string color   = 2;
-  sint32 x       = 3;
-  sint32 y       = 4;
-  sint32 z       = 5;
-  bool   z_valid = 6;
-  uint32 layer   = 7;
+  string name = 1;
+  string color = 2;
+  sint32 x = 3;
+  sint32 y = 4;
+  sint32 z = 5;
+  bool z_valid = 6;
+  uint32 layer = 7;
 }
 
 // A selectable map provider package — a named subdirectory under the
@@ -295,8 +296,8 @@ message MapLocation {
 // package. zone_count is the number of base zone maps the package provides
 // (display only).
 message MapPackage {
-  string id         = 1;
-  string label      = 2;
+  string id = 1;
+  string label = 2;
   uint32 zone_count = 3;
 }
 
@@ -306,22 +307,22 @@ message MapPackage {
 // triggers a fresh ZoneChanged with the new geometry. Active package is
 // global (shared by all connected clients) in v1.
 message MapPackagesUpdate {
-  repeated MapPackage packages  = 1;
-  string              active_id = 2;
+  repeated MapPackage packages = 1;
+  string active_id = 2;
 }
 
 message MapGeometry {
-  sint32               min_x     = 1;
-  sint32               min_y     = 2;
-  sint32               max_x     = 3;
-  sint32               max_y     = 4;
-  repeated MapLine     lines     = 5;
+  sint32 min_x = 1;
+  sint32 min_y = 2;
+  sint32 max_x = 3;
+  sint32 max_y = 4;
+  repeated MapLine lines = 5;
   repeated MapLocation locations = 6;
   // Suggested height-filter window parsed from Brewall map annotations
   // (Height_Filter:_above/below in layer-2 P-lines). 0 = no hint; both
   // fields are 0 when the map has no annotation.
-  uint32               height_hint_above = 7;
-  uint32               height_hint_below = 8;
+  uint32 height_hint_above = 7;
+  uint32 height_hint_below = 8;
 }
 
 message SpawnAdded {
@@ -331,8 +332,8 @@ message SpawnAdded {
 // Proto3 field presence (`optional`) gives us per-field diffs: only changed
 // fields are sent on the wire.
 message SpawnUpdated {
-  uint32          id = 1;
-  optional Pos    pos = 2;
+  uint32 id = 1;
+  optional Pos pos = 2;
   optional uint32 hp_cur = 3;
   optional uint32 level = 4;
   optional uint32 animation = 5;
@@ -353,23 +354,23 @@ message SpawnKilled {
 // arrives. Contains actual EQ item names for all 23 worn slots plus the
 // biography text the inspected player has set.
 message InspectAnswer {
-  uint32          spawn_id   = 1;
-  repeated string item_names = 2;  // 23 entries in EQ worn-slot order; empty string = empty slot
-  string          bio        = 3;
+  uint32 spawn_id = 1;
+  repeated string item_names = 2; // 23 entries in EQ worn-slot order; empty string = empty slot
+  string bio = 3;
 }
 
 message LootItem {
   string name = 1;
-  uint32 icon = 2;  // EQ item-icon id (dragitem atlas)
+  uint32 icon = 2; // EQ item-icon id (dragitem atlas)
   // EQ database item id, parsed from the leading 6 hex of the item-link header.
   uint32 item_id = 3;
 }
 
 // eql corpse loot window (OP_LootDrops).
 message LootDrops {
-  uint32           corpse_id   = 1;
-  string           corpse_name = 2;
-  repeated LootItem items      = 3;  // one per lootable slot
+  uint32 corpse_id = 1;
+  string corpse_name = 2;
+  repeated LootItem items = 3; // one per lootable slot
 }
 
 // Snapshot of the user's character state. Sent once after Subscribe and
@@ -377,36 +378,36 @@ message LootDrops {
 // hpChanged, manaChanged, levelChanged, expChangedInt, expAltChangedInt).
 // Fields default to 0 before the player profile arrives.
 message PlayerStats {
-  uint32 hp_cur      = 1;
-  uint32 hp_max      = 2;
-  uint32 mana_cur    = 3;
-  uint32 mana_max    = 4;
+  uint32 hp_cur = 1;
+  uint32 hp_max = 2;
+  uint32 mana_cur = 3;
+  uint32 mana_max = 4;
   // Endurance — the run/jump bar EQ paints in yellow, fed from
   // OP_EndUpdate (resolved 2026-04-28). Distinct from OP_Stamina,
   // which tracks hunger/thirst on the daemon side and isn't
   // surfaced over the wire.
   uint32 endurance_cur = 5;
   uint32 endurance_max = 6;
-  uint32 level       = 7;
-  uint32 exp_cur     = 8;
-  uint32 exp_max     = 9;
-  uint32 aa_exp_cur  = 10;
-  uint32 aa_exp_max  = 11;
+  uint32 level = 7;
+  uint32 exp_cur = 8;
+  uint32 exp_max = 9;
+  uint32 aa_exp_cur = 10;
+  uint32 aa_exp_max = 11;
   // Total AAs spent (including glyphs on Live). 0 on Quarm: the EQMac
   // wire format doesn't carry a spent count separately. Use aa_unspent
   // (field 24) for "points ready to spend" — that one is populated by
   // both daemons.
-  uint32 aa_points   = 12;
-  string name        = 13;
-  uint32 class_      = 14;
-  uint32 race        = 15;
-  uint32 str         = 16;
-  uint32 sta         = 17;
-  uint32 agi         = 18;
-  uint32 dex         = 19;
-  uint32 wis         = 20;
-  uint32 int_        = 21;
-  uint32 cha         = 22;
+  uint32 aa_points = 12;
+  string name = 13;
+  uint32 class_ = 14;
+  uint32 race = 15;
+  uint32 str = 16;
+  uint32 sta = 17;
+  uint32 agi = 18;
+  uint32 dex = 19;
+  uint32 wis = 20;
+  uint32 int_ = 21;
+  uint32 cha = 22;
   // Sparse list — only skills the player has learned (legacy showeq uses
   // value=255 as an "invalid/unlearned" sentinel; daemon filters those
   // before sending). Names live in the web client (mirror of
@@ -417,7 +418,7 @@ message PlayerStats {
   // aa_unspent at wire offset 19519 (resolved 2026-05-02). Quarm: the
   // single Mac aapoints field IS the unspent count (per
   // scry-cpp-quarm/src/everquest.h:788).
-  uint32 aa_unspent  = 24;
+  uint32 aa_unspent = 24;
   // Sparse list — only the AAs the player has actually purchased
   // (rank > 0). Auto-grants from charProfileStruct.aa_array (rank=0)
   // are filtered server-side to keep the snapshot small. ability_id
@@ -429,14 +430,14 @@ message PlayerStats {
   uint32 money_copper = 26;
   // Hunger/thirst from OP_Stamina: "ticks till next eat/drink", counting down
   // from a full meal (~6000) to 0 = hungry/thirsty. Same on live + eql.
-  uint32 food  = 27;
+  uint32 food = 27;
   uint32 water = 28;
   // EQL multiclass bitmask (bit N = class N); class_ above is only the primary.
   // 0 on live/single-class. Web decodes to e.g. "SHD/DRU/MNK".
   uint32 class_mask = 29;
   // EQL active STANCE name ("Defense"), empty if none/unknown. One stance is
   // active at a time; the server echoes OP_Stance (0x0fab) on each swap.
-  string stance     = 30;
+  string stance = 30;
   // EQL active INVOCATION name ("Recover"), empty if none/unknown. One
   // invocation is active at a time; echoed via OP_Invocation (0x3b12) on swap.
   string invocation = 31;
@@ -444,17 +445,17 @@ message PlayerStats {
 
 message SkillEntry {
   uint32 skill_id = 1;
-  uint32 value    = 2;
+  uint32 value = 2;
 }
 
 message AAEntry {
   uint32 ability_id = 1;
-  uint32 rank       = 2;
+  uint32 rank = 2;
   // Human-readable AA title. ability_id is a per-rank descID; its name
   // lives in dbstr_us.txt type-1 keyed by titleSID, and the descID->titleSID
   // map is only carried by OP_SendAATable. Empty until the daemon decodes
   // that table; clients fall back to "#<ability_id>".
-  string name       = 3;
+  string name = 3;
 }
 
 // Single chat-channel message. Covers both player-to-player chat
@@ -465,9 +466,9 @@ message AAEntry {
 // One completed corpse-loot action. Emitted per server confirmation, so a
 // client can total session earnings without matching message wording.
 message LootTransaction {
-  uint32 corpse_id   = 1;
-  uint32 item_id     = 2;
-  uint32 quantity    = 3;
+  uint32 corpse_id = 1;
+  uint32 item_id = 2;
+  uint32 quantity = 3;
   // Sale proceeds on an item event (0 if unsold), or the corpse's coin pile
   // when coin_from_corpse. Applied to the player's running total either way.
   uint32 coin_copper = 4;
@@ -477,48 +478,17 @@ message LootTransaction {
   bool coin_from_corpse = 5;
 }
 
-// One recorded loot row from the host's loot store. The host records as it
-// decodes, so this is history — distinct from LootTransaction/LootDrops, which
-// are the live events it was built from.
-message LootRecord {
-  int64  ts           = 1;   // epoch ms
-  // "message" = what the player acquired, "window" = corpse contents,
-  // "coin" = a coin pile (item_name is "Coin").
-  string source       = 2;
-  string item_name    = 3;
-  uint32 item_id      = 4;   // 0 = unknown
-  uint32 icon         = 5;   // 0 = none; window rows only
-  uint32 qty          = 6;
-  string mob_name     = 7;   // raw, e.g. "an ice giant"
-  string mob_norm     = 8;   // article-stripped + lowercased — the grouping key
-  uint32 corpse_id    = 9;   // 0 = none
-  string zone_short   = 10;
-  string zone_base    = 11;  // instance suffix stripped
-  string instance     = 12;  // "", "solo", "multi", "eqlraidgroup"
-  bool   sold         = 13;
-  uint32 money_copper = 14;  // sale proceeds, or the pile on a coin row
-  // "inventory" | "sold" | "created" | "corpse_coin" | a storage destination
-  // ("tradeskill depot", "Dragon Hoard"). Empty when the line said nothing.
-  string disposition  = 15;
-  string looter       = 16;
-}
-
-// Reply to a LootQuery, on the requesting connection only. Newest first.
-message LootPage {
-  repeated LootRecord rows = 1;
-}
-
 message ChatMessage {
   // Channel index from scry-cpp/src/message.h's MessageType enum:
   // 0=Guild, 2=Group, 3=Shout, 4=Auction, 5=OOC, 7=Tell, 8=Say,
   // 11=GMSay, 14=GMTell, 15=Raid. Server-coloured messages collapse
   // onto a small set of MTs (see chat_color for full fidelity).
   uint32 channel = 1;
-  string from    = 2;
+  string from = 2;
   // Target (recipient) name — only meaningful for tells; empty for
   // broadcast channels.
-  string target  = 3;
-  string text    = 4;
+  string target = 3;
+  string text = 4;
   // Raw EQ ChatColor (CC_* in scry-cpp/src/everquest.h). Carries
   // the full client-side colour fidelity for OP_FormattedMessage /
   // SimpleMessage / SpecialMessage. 0 (CC_Default) when the message
@@ -540,12 +510,12 @@ message ChatMessage {
 }
 
 message GroupMember {
-  uint32 slot     = 1;   // 0..MAX_GROUP_MEMBERS-1 (= 5)
-  string name     = 2;   // empty if the slot isn't filled
-  bool   in_zone  = 3;   // true when GroupMgr has a Spawn for this slot
-  uint32 spawn_id = 4;   // 0 when out of zone
-  uint32 level    = 5;
-  uint32 class_   = 6;
+  uint32 slot = 1; // 0..MAX_GROUP_MEMBERS-1 (= 5)
+  string name = 2; // empty if the slot isn't filled
+  bool in_zone = 3; // true when GroupMgr has a Spawn for this slot
+  uint32 spawn_id = 4; // 0 when out of zone
+  uint32 level = 5;
+  uint32 class_ = 6;
 }
 
 // Sent on Subscribe + on every GroupMgr `added`/`removed`/`cleared`
@@ -560,19 +530,19 @@ message GroupUpdate {
 // `duration_s` is the seconds remaining as of `captured_ms`; clients
 // tick down locally without further server round-trips.
 message Buff {
-  uint32 spell_id    = 1;
-  string spell_name  = 2;
-  int32  duration_s  = 3;
-  uint32 caster_id   = 4;
+  uint32 spell_id = 1;
+  string spell_name = 2;
+  int32 duration_s = 3;
+  uint32 caster_id = 4;
   string caster_name = 5;
-  uint32 target_id   = 6;
+  uint32 target_id = 6;
   string target_name = 7;
-  bool   is_song     = 8;
+  bool is_song = 8;
   // True for beneficial spells (buffs/heals), false for detrimental ones
   // (debuffs/DoTs a mob landed on you). Sourced from the spell DB's "good
   // effect" flag. Clients suppress buff-fade alerts for non-beneficial buffs.
-  bool   beneficial  = 9;
-  uint32 icon        = 10;  // spell-icon id (spells atlas)
+  bool beneficial = 9;
+  uint32 icon = 10; // spell-icon id (spells atlas)
 }
 
 message BuffsUpdate {
@@ -597,10 +567,10 @@ message SpawnEffectsUpdate {
 // for cast_time_ms, then clears it. caster_id/spell_id are resolved to names
 // daemon-side. cast_time_ms == 0 is an instant/aborted cast.
 message SpawnCast {
-  uint32 caster_id    = 1;
-  string caster_name  = 2;
-  uint32 spell_id     = 3;
-  string spell_name   = 4;
+  uint32 caster_id = 1;
+  string caster_name = 2;
+  uint32 spell_id = 3;
+  string spell_name = 4;
   uint32 cast_time_ms = 5;
 }
 
@@ -609,14 +579,14 @@ message SpawnCast {
 // `type` is the EQ "action type" byte (bash/kick/cast/...) — see the
 // type byte at offset 0040 in struct action2Struct (everquest.h:2042).
 message CombatEvent {
-  uint32 source_id   = 1;
+  uint32 source_id = 1;
   string source_name = 2;
-  uint32 target_id   = 3;
+  uint32 target_id = 3;
   string target_name = 4;
-  uint32 type        = 5;
-  int32  damage      = 6;
-  uint32 spell_id    = 7;
-  string spell_name  = 8;
+  uint32 type = 5;
+  int32 damage = 6;
+  uint32 spell_id = 7;
+  string spell_name = 8;
 }
 
 // One user-defined Category from scry-cpp/src/category.h's
@@ -625,9 +595,9 @@ message CombatEvent {
 // happens daemon-side, and the client only sees the resulting per-
 // spawn category_ids list.
 message Category {
-  uint32 id    = 1;   // index into CategoriesUpdate.categories
-  string name  = 2;
-  string color = 3;   // "#rrggbb"
+  uint32 id = 1; // index into CategoriesUpdate.categories
+  string name = 2;
+  string color = 3; // "#rrggbb"
 }
 
 // Sent on Subscribe + on every CategoryMgr add/del/cleared/loaded
@@ -644,10 +614,10 @@ message CategoriesUpdate {
 // per-zone-shortname overlay file.
 message FilterRule {
   uint32 filter_type = 1;
-  string pattern     = 2;
-  uint32 min_level   = 3;
-  uint32 max_level   = 4;
-  bool   per_zone    = 5;
+  string pattern = 2;
+  uint32 min_level = 3;
+  uint32 max_level = 4;
+  bool per_zone = 5;
 }
 
 // Sent on Subscribe + on every FilterMgr filtersChanged signal.
@@ -662,7 +632,7 @@ message FilterRulesUpdate {
 // XP delta (0-100000 per-level scale; 1000 = 0.1% of a level), and zone long
 // name. Modern Live sends the actual XP percentage directly; no ZEM calculation.
 message ExperienceTick {
-  string mob_name  = 1;
+  string mob_name = 1;
   uint32 mob_level = 2;
   uint32 xp_gained = 3;
   string zone_name = 4;
@@ -675,12 +645,12 @@ message ExperienceTick {
 // XMLPreferences's QVariant storage on its side.
 message Pref {
   string section = 1;
-  string key     = 2;
+  string key = 2;
   oneof value {
     string string_value = 3;
-    int64  int_value    = 4;
+    int64 int_value = 4;
     double double_value = 5;
-    bool   bool_value   = 6;
+    bool bool_value = 6;
   }
 }
 
@@ -727,28 +697,34 @@ message SpawnPoint {
   // (decimal x|y|z concatenated without separators) so resume + replay
   // semantics line up with the in-memory hashmap. Treat as opaque —
   // x/y/z are also carried below for client display.
-  string key          = 1;
-  sint32 x            = 2;
-  sint32 y            = 3;
-  sint32 z            = 4;
+  string key = 1;
+  sint32 x = 2;
+  sint32 y = 3;
+  sint32 z = 4;
   // User-assigned name (via "rename" — empty until set). Distinct from
   // `last`, the name of the most recent spawn at this point.
-  string name         = 5;
-  string last         = 6;
-  uint32 last_id      = 7;
-  uint32 count        = 8;
+  string name = 5;
+  string last = 6;
+  uint32 last_id = 7;
+  uint32 count = 8;
   // Wall-clock seconds since epoch. spawn_time_s is the most recent
   // pop; death_time_s is 0 until the point's last spawn dies. Once both
   // are non-zero, diff_time_s is the learned cycle time (the gap
   // between death_time_s and the next spawn_time_s).
   uint64 spawn_time_s = 9;
   uint64 death_time_s = 10;
-  uint64 diff_time_s  = 11;
+  uint64 diff_time_s = 11;
 }
 
-message SpawnPointAdded   { SpawnPoint point = 1; }
-message SpawnPointUpdated { SpawnPoint point = 1; }
-message SpawnPointRemoved { string key = 1; }
+message SpawnPointAdded {
+  SpawnPoint point = 1;
+}
+message SpawnPointUpdated {
+  SpawnPoint point = 1;
+}
+message SpawnPointRemoved {
+  string key = 1;
+}
 // SpawnMonitor::clear() (zone change, explicit "clear all" from a
 // client). Empty payload — clients drop their entire spawn-point map.
 message SpawnPointsCleared {}
@@ -758,9 +734,9 @@ message SpawnPointsCleared {}
 // description and is_loopback are best-effort and may be empty/false
 // on platforms or pcap builds that don't supply them.
 message NetworkDevice {
-  string name = 1;          // pcap interface name (e.g. "eth0", "wlp3s0")
+  string name = 1; // pcap interface name (e.g. "eth0", "wlp3s0")
   string description = 2;
-  bool   is_loopback = 3;
+  bool is_loopback = 3;
 }
 
 // Response to a ListDevices request. Sent only to the requesting
@@ -777,12 +753,12 @@ message DevicesList {
 // character name (re-handshakes after zone change) are merged in the
 // registry — only the original entry appears in BoxListUpdated.
 message BoxMeta {
-  string box_id       = 1;
+  string box_id = 1;
   string display_name = 2;
-  string client_ip    = 3;
+  string client_ip = 3;
   uint32 packet_count = 4;
-  string zone         = 5;  // short zone name of the box's current zone ("" if unknown)
-  uint32 level        = 6;  // player level (0 until OP_PlayerProfile decodes)
+  string zone = 5; // short zone name of the box's current zone ("" if unknown)
+  uint32 level = 6; // player level (0 until OP_PlayerProfile decodes)
 }
 
 // Multibox: registry update. Broadcast to every connected client
@@ -792,8 +768,8 @@ message BoxMeta {
 // In v1 (Stage 4 of docs/MULTIBOX_PLAN.md) active_box_id is cosmetic
 // — Stage 3 hooks it up to per-box state-manager decode.
 message BoxListUpdated {
-  repeated BoxMeta boxes         = 1;
-  string           active_box_id = 2;
+  repeated BoxMeta boxes = 1;
+  string active_box_id = 2;
 }
 
 // One item template the daemon has parsed from an OP_ItemPacket and
@@ -801,8 +777,8 @@ message BoxListUpdated {
 // BASE values; equipped augments contribute via separate Item entries
 // (each aug is itself an item served via OP_ItemPacket).
 message Item {
-  uint32 id        = 1;
-  string name      = 2;
+  uint32 id = 1;
+  string name = 2;
   // Omitted when identical to `name`. Lore-locked items typically carry
   // the lore version separately in the EQ wire format.
   string lore_name = 3;
@@ -812,15 +788,15 @@ message Item {
   uint32 slot_mask = 4;
   // Flags blob (size enum at byte[19] + bit-packed flags). Not yet
   // fully decoded; passed through for clients that want to inspect.
-  uint32 flags     = 5;
-  float  weight    = 6;
-  int32  hp        = 7;
-  int32  mana      = 8;
-  int32  endurance = 9;
-  int32  ac        = 10;
+  uint32 flags = 5;
+  float weight = 6;
+  int32 hp = 7;
+  int32 mana = 8;
+  int32 endurance = 9;
+  int32 ac = 10;
   // [STR, STA, AGI, DEX, CHA, INT, WIS] — 7 entries, matches
   // src/itempacket.h ItemStatIndex.
-  repeated int32 stats   = 11 [packed = true];
+  repeated int32 stats = 11 [packed = true];
   // [CR, DR, PR, MR, FR] — 5 entries, matches ItemResistIndex.
   repeated int32 resists = 12 [packed = true];
   int32 corruption = 13;
@@ -842,13 +818,13 @@ message ItemLearned {
 // contributions are not yet folded in.
 message ItemCacheTotals {
   uint32 item_count = 1;
-  int32  hp         = 2;
-  int32  mana       = 3;
-  int32  endurance  = 4;
-  int32  ac         = 5;
-  repeated int32 stats   = 6 [packed = true];
+  int32 hp = 2;
+  int32 mana = 3;
+  int32 endurance = 4;
+  int32 ac = 5;
+  repeated int32 stats = 6 [packed = true];
   repeated int32 resists = 7 [packed = true];
-  int32  corruption = 8;
+  int32 corruption = 8;
 }
 
 // Snapshot of the player's currently equipped gear, by worn-slot
@@ -863,8 +839,8 @@ message ItemCacheTotals {
 // Note: field name `slots` is reserved here because it collides with
 // Qt's `slots:` access-label keyword in generated C++ headers.
 message WornSet {
-  repeated int32  slot_indices = 1 [packed = true];
-  repeated uint32 item_ids     = 2 [packed = true];
+  repeated int32 slot_indices = 1 [packed = true];
+  repeated uint32 item_ids = 2 [packed = true];
 }
 
 // Norrath in-game date/time, captured at the moment the daemon parsed
@@ -879,17 +855,17 @@ message WornSet {
 // representation is 1-based hour; the daemon normalizes to 0-based to
 // match QDateTime conventions.
 message EqTimeSync {
-  uint32 year   = 1;
-  uint32 month  = 2;   // 1..12
-  uint32 day    = 3;   // 1..28
-  uint32 hour   = 4;   // 0..23
-  uint32 minute = 5;   // 0..59
+  uint32 year = 1;
+  uint32 month = 2; // 1..12
+  uint32 day = 3; // 1..28
+  uint32 hour = 4; // 0..23
+  uint32 minute = 5; // 0..59
 }
 
 // EQ zone server endpoint the sniffed client is currently connected to,
 // as reported by the most recent OP_ZoneServerInfo packet on the world
 // stream. Resent on each world→zone handoff (i.e. each /zone change).
 message ZoneServer {
-  string host = 1;   // FQDN or IP, e.g. "eqzone-80.everquest.com"
-  uint32 port = 2;   // udp port the zone session is on
+  string host = 1; // FQDN or IP, e.g. "eqzone-80.everquest.com"
+  uint32 port = 2; // udp port the zone session is on
 }
